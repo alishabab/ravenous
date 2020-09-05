@@ -6,6 +6,8 @@ import './SearchBar.css';
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
+    this.handleTermChange = this.handleTermChange.bind(this);
+    this.handleLocationChange = this.handleLocationChange.bind(this);
     this.state = {
       term: '',
       location: '',
@@ -34,6 +36,18 @@ class SearchBar extends React.Component {
     })
   }
 
+  handleTermChange(e) {
+    this.setState({
+      term: e.target.value
+    })
+  }
+
+  handleLocationChange(e) {
+    this.setState({
+      location: e.target.value
+    })
+  }
+
   renderSortByOptions() {
     return Object.keys(this.sortByOptions).map((sortByOption) => {
       const sortByOptionValue = this.sortByOptions[sortByOption];
@@ -50,8 +64,8 @@ class SearchBar extends React.Component {
           </ul>
         </div>
         <div className="SearchBar-fields">
-          <input placeholder="Search Businesses" />
-          <input placeholder="Where?" />
+          <input placeholder="Search Businesses" onChange={this.handleTermChange}/>
+          <input placeholder="Where?" onChange={this.handleLocationChange}/>
         </div>
         <div className="SearchBar-submit">
           <a> Let's Go</a>
