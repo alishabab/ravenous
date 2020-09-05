@@ -8,6 +8,7 @@ class SearchBar extends React.Component {
     super(props);
     this.handleTermChange = this.handleTermChange.bind(this);
     this.handleLocationChange = this.handleLocationChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
     this.state = {
       term: '',
       location: '',
@@ -48,6 +49,11 @@ class SearchBar extends React.Component {
     })
   }
 
+  handleSearch(e) {
+    this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy)
+    e.preventDefault();
+  }
+
   renderSortByOptions() {
     return Object.keys(this.sortByOptions).map((sortByOption) => {
       const sortByOptionValue = this.sortByOptions[sortByOption];
@@ -68,7 +74,7 @@ class SearchBar extends React.Component {
           <input placeholder="Where?" onChange={this.handleLocationChange}/>
         </div>
         <div className="SearchBar-submit">
-          <a> Let's Go</a>
+          <a onClick={this.handleSearch}> Let's Go</a>
         </div>
       </div>
     )
